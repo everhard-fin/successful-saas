@@ -46,7 +46,7 @@ Map whatever your backend returns to roughly these fields. The names don't need 
 
 - **`reset_date`** must be *today + resetInDays*. The website uses the same rule, so Fin and the dashboard always show the same date. Check that the backend's "today" uses the same timezone as the presenter's browser.
 - **`limit_behaviour`** is one of `throttled` (Starter, Growth), `billed` (Scale) or `blocked` (Basic (Legacy)).
-- **Not found** (for example `nobody@unknown.example`): return `{"found": false}` with HTTP 200. Don't return an error status. Fin reads `found: false` and asks for the account email, as Guidance rule 4 tells it to.
+- **Not found** (for example `nobody@unknown.example`): return `{"found": false}` with HTTP 200. Don't return an error status. Fin reads `found: false` and asks for the account email, as Guidance rule 5 tells it to.
 
 ## Test values
 

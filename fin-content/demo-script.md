@@ -12,7 +12,7 @@ The presenter's run-of-show. The main story is **Jordan**, which takes about 4 m
 - [ ] Do a dry run with Jordan, then press **Reset conversation**.
 - [ ] Close the dry-run conversations in the Inbox so the Messenger opens clean.
 - [ ] Open the demo panel (Shift + D), select Jordan, then close the panel before sharing your screen.
-- [ ] Optional: in the Messenger settings, set a greeting such as *"Hi {first name} 👋 I'm Fin, the Successful SaaS AI agent. Ask me anything about your account."*
+- [ ] Optional: in the Messenger settings, set a greeting such as *"Hi {first name} 👋 I'm the Successful SaaS AI assistant. Ask me anything about your account."*
 
 Reset dates are *today + N days*. The dates below assume a demo on **Oct 1**, so adjust them to your demo date.
 
@@ -26,7 +26,7 @@ Reset dates are *today + N days*. The dates below assume a demo on **Oct 1**, so
 2. **Open the Messenger and paste the opener:**
    > I got an error saying I've hit my API limit — can you check my account?
 
-   **Expected from Fin:** it greets Jordan by name and looks up the account. It says Jordan has used 48,200 of 50,000 calls (96%), has 1,800 left, and that usage resets on Oct 5 (in 4 days).
+   **Expected from Fin:** it introduces itself as the Successful SaaS AI assistant, greets Jordan by name and looks up the account. It says Jordan has used 48,200 of 50,000 calls (96%), has 1,800 left, and that usage resets on Oct 5 (in 4 days).
 
    **Talking point:** "No 'what's your email?', no 'which plan are you on?'. Fin knows who's signed in and pulled live account data."
 3. **Follow-up:**
@@ -110,5 +110,5 @@ Switch persona in the demo panel (Shift + D). The Messenger restarts as the new 
 | Fin answers as the previous persona | Press **Reset conversation**. If that doesn't work, refresh the page. The persona is saved. |
 | Fin asks for an email for a known persona | The connector didn't find the user. Check the connector's test for that email, and check that the email attribute is set on the user. |
 | Reset date is off by one day | The backend and the browser disagree about "today", which can happen around midnight or across timezones. Line up the backend's timezone with yours. |
-| Fin offers an upgrade to Marcus | Check that Guidance rule 6 is switched on. |
+| Fin offers an upgrade to Marcus | Check that Guidance rule 7 is switched on. |
 | Old conversations show in the Messenger | Close them in the Inbox before the demo. |
