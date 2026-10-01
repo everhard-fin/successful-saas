@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orbitly · Dashboard</title>
+  <meta name="description" content="Orbitly — The API platform for modern teams.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Animated gradient-mesh background -->
+  <div class="mesh" aria-hidden="true">
+    <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span>
+  </div>
+
+  <header class="nav glass">
+    <a class="brand" href="#" aria-label="Orbitly home">
+      <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <defs>
+          <linearGradient id="orbit-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#a78bfa"/>
+            <stop offset="1" stop-color="#2dd4bf"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="16" cy="16" rx="13" ry="5.5" fill="none" stroke="url(#orbit-grad)" stroke-width="2" transform="rotate(-30 16 16)"/>
+        <circle cx="16" cy="16" r="6" fill="url(#orbit-grad)"/>
+        <circle cx="27.3" cy="9.5" r="2.4" fill="#ecebff"/>
+      </svg>
+      <span>Orbitly</span>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a href="#" class="active">Dashboard</a>
+      <a href="#">Usage</a>
+      <a href="#">Billing</a>
+      <a href="#">Docs</a>
+    </nav>
+    <div class="user">
+      <div class="avatar" id="user-initials">JL</div>
+      <div class="user-meta">
+        <strong id="user-name">Jordan Lee</strong>
+        <span id="user-company">Brightloop</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">The API platform for modern teams</p>
+      <h1>Welcome back, <span id="hero-name" class="grad-text">Jordan</span></h1>
+      <p class="muted">Here's how your API usage looks this billing cycle.</p>
+    </section>
+
+    <div id="banner" class="banner glass" role="alert" hidden>
+      <svg class="banner-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3 2 21h20L12 3Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M12 10v5M12 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="banner-copy">
+        <strong id="banner-title"></strong>
+        <p id="banner-text"></p>
+      </div>
+      <a class="btn btn-danger" href="https://billing.example.com">View billing</a>
+    </div>
+
+    <div class="grid">
+      <section class="card glass usage-card" aria-labelledby="usage-heading">
+        <header class="card-head">
+          <h2 id="usage-heading">API usage</h2>
+          <span class="badge" id="usage-plan-badge">Starter</span>
+        </header>
+        <div class="usage-body">
+          <div class="ring" id="ring" data-level="green">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+              <circle class="ring-track" cx="100" cy="100" r="84"/>
+              <circle class="ring-fill" id="ring-fill" cx="100" cy="100" r="84"/>
+            </svg>
+            <div class="ring-label">
+              <span id="usage-pct">0%</span>
+              <small>used</small>
+            </div>
+          </div>
+          <dl class="stats">
+            <div><dt>API calls this month</dt><dd id="usage-count"></dd></div>
+            <div><dt>Calls remaining</dt><dd id="usage-remaining"></dd></div>
+            <div><dt>Billing cycle</dt><dd id="usage-reset"></dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="card glass plan-card" aria-labelledby="plan-heading">
+        <header class="card-head">
+          <h2 id="plan-heading">Current plan</h2>
+        </header>
+        <p class="plan-name" id="plan-name"></p>
+        <p class="plan-price" id="plan-price"></p>
+        <ul class="plan-facts">
+          <li><span>Monthly limit</span><strong id="plan-limit"></strong></li>
+          <li><span>Over the limit</span><strong id="plan-overage"></strong></li>
+        </ul>
+        <p class="plan-note" id="plan-note" hidden>This legacy plan is no longer offered. Move to a current plan to raise your limit.</p>
+        <a class="btn btn-primary" href="https://billing.example.com">Manage billing</a>
+      </section>
+    </div>
+
+    <section class="pricing" aria-labelledby="pricing-heading">
+      <h2 id="pricing-heading">Plans</h2>
+      <p class="muted">Scale your API calls as your team grows.</p>
+      <div class="pricing-grid" id="pricing-grid"></div>
+    </section>
+  </main>
+
+  <!-- Presenter-only demo controls (Shift + D) -->
+  <button id="demo-toggle" class="demo-pill glass" type="button" aria-expanded="false" aria-controls="demo-panel">Demo</button>
+  <aside id="demo-panel" class="demo-panel glass" aria-label="Demo controls" aria-hidden="true" inert>
+    <header class="panel-head">
+      <div>
+        <h3>Demo personas</h3>
+        <p class="muted small">Toggle with <kbd>Shift</kbd> + <kbd>D</kbd></p>
+      </div>
+      <button id="demo-close" class="icon-btn" type="button" aria-label="Close demo panel">×</button>
+    </header>
+    <div id="persona-list" class="persona-list" role="radiogroup" aria-label="Personas"></div>
+    <button id="reset-convo" class="btn btn-ghost full" type="button">Reset conversation</button>
+  </aside>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
