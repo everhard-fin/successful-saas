@@ -1,6 +1,6 @@
-# Orbitly — Fin demo dashboard
+# Successful SaaS — Fin demo dashboard
 
-A static, single-page fake customer dashboard for **Orbitly**, a fictional API company, with the Intercom Messenger embedded. A hidden presenter panel switches between test personas so Fin sees a different logged-in user each time.
+A static, single-page fake customer workspace for **Successful SaaS**, a deliberately generic fictional SaaS company, with the Intercom Messenger embedded. A hidden presenter panel switches between test personas so Fin sees a different logged-in user each time.
 
 All brands, people and emails are synthetic.
 
@@ -9,7 +9,7 @@ All brands, people and emails are synthetic.
 | File | Purpose |
 | --- | --- |
 | `index.html` | Page markup |
-| `styles.css` | Glassmorphism theme, animated background, responsive layout |
+| `styles.css` | Enterprise theme (solid sections, glass hero), responsive layout |
 | `app.js` | Personas, dashboard rendering, demo panel, Messenger boot |
 
 No build step, framework or backend. The only external resources are the Intercom Messenger script and the Inter font from Google Fonts.
@@ -27,10 +27,10 @@ Then open <http://localhost:8000>. Opening `index.html` directly also works, but
 At the top of `app.js`:
 
 ```js
-const INTERCOM_APP_ID = "REPLACE_ME";
+const INTERCOM_APP_ID = "nm57i4fb";
 ```
 
-Replace `REPLACE_ME` with the demo workspace's app_id (Intercom → Settings → Installation → Web). This is a public identifier, not a secret. Until it's set, the page shows a warning toast and doesn't load the Messenger.
+It's set to the demo workspace's app_id (Intercom → Settings → Installation → Web). This is a public identifier, not a secret. If you set it back to `"REPLACE_ME"`, the page shows a warning toast and doesn't load the Messenger.
 
 The workspace region is set by `INTERCOM_API_BASE` just below it. US is the default; uncomment the EU or AU line if your workspace is hosted there.
 

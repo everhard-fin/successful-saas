@@ -3,57 +3,73 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Orbitly · Dashboard</title>
-  <meta name="description" content="Orbitly — The API platform for modern teams.">
+  <title>Successful SaaS · Workspace</title>
+  <meta name="description" content="Successful SaaS — the platform for modern teams.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Animated gradient-mesh background -->
-  <div class="mesh" aria-hidden="true">
-    <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span>
-  </div>
-
-  <header class="nav glass">
-    <a class="brand" href="#" aria-label="Orbitly home">
-      <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
-        <defs>
-          <linearGradient id="orbit-grad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#a78bfa"/>
-            <stop offset="1" stop-color="#2dd4bf"/>
-          </linearGradient>
-        </defs>
-        <ellipse cx="16" cy="16" rx="13" ry="5.5" fill="none" stroke="url(#orbit-grad)" stroke-width="2" transform="rotate(-30 16 16)"/>
-        <circle cx="16" cy="16" r="6" fill="url(#orbit-grad)"/>
-        <circle cx="27.3" cy="9.5" r="2.4" fill="#ecebff"/>
-      </svg>
-      <span>Orbitly</span>
-    </a>
-    <nav class="links" aria-label="Primary">
-      <a href="#" class="active">Dashboard</a>
-      <a href="#">Usage</a>
-      <a href="#">Billing</a>
-      <a href="#">Docs</a>
-    </nav>
-    <div class="user">
-      <div class="avatar" id="user-initials">JL</div>
-      <div class="user-meta">
-        <strong id="user-name">Jordan Lee</strong>
-        <span id="user-company">Brightloop</span>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#" aria-label="Successful SaaS home">
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <defs>
+            <linearGradient id="logo-grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#6366f1"/>
+              <stop offset="0.55" stop-color="#8b5cf6"/>
+              <stop offset="1" stop-color="#14b8a6"/>
+            </linearGradient>
+          </defs>
+          <rect width="32" height="32" rx="9" fill="url(#logo-grad)"/>
+          <path d="M8 21.5 13.5 16l4 3.5L24 12" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M19.5 11.5H24.5V16.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Successful <b>SaaS</b></span>
+      </a>
+      <nav class="links" aria-label="Primary">
+        <a href="#" class="active">Overview</a>
+        <a href="#">Projects</a>
+        <a href="#">Team</a>
+        <a href="#">Billing</a>
+        <a href="#">Help</a>
+      </nav>
+      <div class="user">
+        <div class="avatar" id="user-initials">JL</div>
+        <div class="user-meta">
+          <strong id="user-name">Jordan Lee</strong>
+          <span id="user-company">Brightloop</span>
+        </div>
       </div>
     </div>
+    <div class="accent-bar" aria-hidden="true"></div>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <p class="eyebrow">The API platform for modern teams</p>
-      <h1>Welcome back, <span id="hero-name" class="grad-text">Jordan</span></h1>
-      <p class="muted">Here's how your API usage looks this billing cycle.</p>
-    </section>
+  <!-- Dark hero band with the animated gradient mesh -->
+  <section class="hero">
+    <div class="mesh" aria-hidden="true">
+      <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+    </div>
+    <div class="hero-inner">
+      <div>
+        <p class="eyebrow"><span class="js-company" data-fallback="Your">Brightloop</span> workspace</p>
+        <h1>Welcome back, <span id="hero-name" class="grad-text">Jordan</span></h1>
+        <p class="hero-sub">Everything your team needs to run, share and grow its work, in one place.</p>
+      </div>
+      <div class="hero-status glass">
+        <div class="status-row"><span class="dot dot-green"></span><strong>All systems operational</strong></div>
+        <div class="status-meta">
+          <div><span>Plan</span><strong id="hero-plan">Starter</strong></div>
+          <div><span>Uptime (30 days)</span><strong>99.98%</strong></div>
+          <div><span>Support</span><strong>24/7</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <div id="banner" class="banner glass" role="alert" hidden>
+  <main class="container">
+    <div id="banner" class="banner" role="alert" hidden>
       <svg class="banner-icon" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 3 2 21h20L12 3Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
         <path d="M12 10v5M12 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -66,59 +82,105 @@
     </div>
 
     <div class="grid">
-      <section class="card glass usage-card" aria-labelledby="usage-heading">
+      <section class="card service-card" aria-labelledby="service-heading">
         <header class="card-head">
-          <h2 id="usage-heading">API usage</h2>
-          <span class="badge" id="usage-plan-badge">Starter</span>
+          <h2 id="service-heading">Your service</h2>
+          <span class="pill pill-green">Active</span>
         </header>
-        <div class="usage-body">
-          <div class="ring" id="ring" data-level="green">
-            <svg viewBox="0 0 200 200" aria-hidden="true">
-              <circle class="ring-track" cx="100" cy="100" r="84"/>
-              <circle class="ring-fill" id="ring-fill" cx="100" cy="100" r="84"/>
-            </svg>
-            <div class="ring-label">
-              <span id="usage-pct">0%</span>
-              <small>used</small>
-            </div>
+        <div class="features">
+          <div class="feature">
+            <span class="icon icon-indigo" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
+            </span>
+            <div><h3>Workspace</h3><p>Projects, files and dashboards shared across your team.</p></div>
           </div>
-          <dl class="stats">
-            <div><dt>API calls this month</dt><dd id="usage-count"></dd></div>
-            <div><dt>Calls remaining</dt><dd id="usage-remaining"></dd></div>
-            <div><dt>Billing cycle</dt><dd id="usage-reset"></dd></div>
-          </dl>
+          <div class="feature">
+            <span class="icon icon-teal" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 7H6a4 4 0 0 0 0 8h3M15 7h3a4 4 0 0 1 0 8h-3M8 11h8"/></svg>
+            </span>
+            <div><h3>Integrations</h3><p>Connect the tools you already use and keep data in sync.</p></div>
+          </div>
+          <div class="feature">
+            <span class="icon icon-violet" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>
+            </span>
+            <div><h3>Automations</h3><p>Let routine work run itself, on a schedule or a trigger.</p></div>
+          </div>
+          <div class="feature">
+            <span class="icon icon-amber" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+            </span>
+            <div><h3>Security</h3><p>Encrypted data, role-based access and daily backups.</p></div>
+          </div>
         </div>
       </section>
 
-      <section class="card glass plan-card" aria-labelledby="plan-heading">
+      <section class="card plan-card" aria-labelledby="plan-heading">
         <header class="card-head">
-          <h2 id="plan-heading">Current plan</h2>
+          <h2 id="plan-heading">Plan &amp; usage</h2>
+          <span class="pill" id="plan-badge">Starter</span>
         </header>
-        <p class="plan-name" id="plan-name"></p>
-        <p class="plan-price" id="plan-price"></p>
+        <p class="plan-name"><span id="plan-name"></span> <span class="plan-price" id="plan-price"></span></p>
+        <div class="meter" id="meter" data-level="green">
+          <div class="meter-top">
+            <span id="usage-count"></span>
+            <strong id="usage-pct"></strong>
+          </div>
+          <div class="meter-track"><div class="meter-fill" id="meter-fill"></div></div>
+          <p class="meter-foot" id="usage-reset"></p>
+        </div>
         <ul class="plan-facts">
           <li><span>Monthly limit</span><strong id="plan-limit"></strong></li>
           <li><span>Over the limit</span><strong id="plan-overage"></strong></li>
         </ul>
         <p class="plan-note" id="plan-note" hidden>This legacy plan is no longer offered. Move to a current plan to raise your limit.</p>
-        <a class="btn btn-primary" href="https://billing.example.com">Manage billing</a>
+        <a class="btn btn-primary" href="https://billing.example.com">Manage plan</a>
+      </section>
+
+      <section class="card" aria-labelledby="actions-heading">
+        <header class="card-head"><h2 id="actions-heading">Quick actions</h2></header>
+        <ul class="actions">
+          <li><a href="#"><span class="icon icon-sm icon-indigo" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"/></svg></span>Invite teammates<span class="chev">›</span></a></li>
+          <li><a href="#"><span class="icon icon-sm icon-teal" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 7H6a4 4 0 0 0 0 8h3M15 7h3a4 4 0 0 1 0 8h-3M8 11h8"/></svg></span>Connect an integration<span class="chev">›</span></a></li>
+          <li><a href="https://billing.example.com"><span class="icon icon-sm icon-violet" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span>View invoices<span class="chev">›</span></a></li>
+          <li><a href="#"><span class="icon icon-sm icon-amber" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h11l5 5v11H4z"/><path d="M14 4v6h6"/></svg></span>Browse the help center<span class="chev">›</span></a></li>
+        </ul>
+      </section>
+
+      <section class="card activity-card" aria-labelledby="activity-heading">
+        <header class="card-head"><h2 id="activity-heading">Recent activity</h2></header>
+        <ol class="timeline">
+          <li><span class="dot dot-indigo"></span><div><strong>Weekly report shared</strong><p>Sent to everyone in <span class="js-company" data-fallback="your team">Brightloop</span></p></div><time>2h ago</time></li>
+          <li><span class="dot dot-teal"></span><div><strong>Integration synced</strong><p>All records up to date</p></div><time>5h ago</time></li>
+          <li><span class="dot dot-violet"></span><div><strong>Automation completed</strong><p>Nightly clean-up finished in 42s</p></div><time>Yesterday</time></li>
+          <li><span class="dot dot-amber"></span><div><strong>New teammate joined</strong><p>Access granted to the workspace</p></div><time>3 days ago</time></li>
+        </ol>
       </section>
     </div>
 
     <section class="pricing" aria-labelledby="pricing-heading">
-      <h2 id="pricing-heading">Plans</h2>
-      <p class="muted">Scale your API calls as your team grows.</p>
+      <div class="section-head">
+        <h2 id="pricing-heading">Plans that grow with you</h2>
+        <p class="muted">Simple monthly pricing. Change plans at any time.</p>
+      </div>
       <div class="pricing-grid" id="pricing-grid"></div>
     </section>
   </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2026 Successful SaaS, Inc.</span>
+      <nav aria-label="Footer"><a href="#">Status</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></nav>
+    </div>
+  </footer>
+
   <!-- Presenter-only demo controls (Shift + D) -->
-  <button id="demo-toggle" class="demo-pill glass" type="button" aria-expanded="false" aria-controls="demo-panel">Demo</button>
+  <button id="demo-toggle" class="demo-pill" type="button" aria-expanded="false" aria-controls="demo-panel">Demo</button>
   <aside id="demo-panel" class="demo-panel glass" aria-label="Demo controls" aria-hidden="true" inert>
     <header class="panel-head">
       <div>
         <h3>Demo personas</h3>
-        <p class="muted small">Toggle with <kbd>Shift</kbd> + <kbd>D</kbd></p>
+        <p class="small">Toggle with <kbd>Shift</kbd> + <kbd>D</kbd></p>
       </div>
       <button id="demo-close" class="icon-btn" type="button" aria-label="Close demo panel">×</button>
     </header>

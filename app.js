@@ -1,5 +1,5 @@
 // Public Messenger app_id (Intercom → Settings → Installation). Not a secret.
-const INTERCOM_APP_ID = "REPLACE_ME";
+const INTERCOM_APP_ID = "nm57i4fb";
 const INTERCOM_API_BASE = "https://api-iam.intercom.io"; // US
 // const INTERCOM_API_BASE = "https://api-iam.eu.intercom.io"; // EU
 // const INTERCOM_API_BASE = "https://api-iam.au.intercom.io"; // AU
@@ -36,7 +36,6 @@ const PLANS = {
 };
 const TIERS = ["Starter", "Growth", "Scale", "Enterprise"];
 
-const RING_C = 2 * Math.PI * 84; // ring radius in index.html
 const $ = (id) => document.getElementById(id);
 const fmt = (n) => n.toLocaleString("en-US");
 const messengerEnabled = Boolean(INTERCOM_APP_ID) && INTERCOM_APP_ID !== "REPLACE_ME";
@@ -70,6 +69,8 @@ function renderDashboard(p) {
   $("user-name").textContent = p.name;
   $("user-company").textContent = p.company;
   $("hero-name").textContent = p.name.split(" ")[0];
+  $("hero-plan").textContent = p.plan;
+  document.querySelectorAll(".js-company").forEach((el) => { el.textContent = p.company === "—" ? el.dataset.fallback : p.company; });
 
   $("banner").hidden = u.pct < 80;
   if (u.pct >= 100) {
@@ -82,14 +83,11 @@ function renderDashboard(p) {
     $("banner-text").textContent = `${fmt(u.remaining)} calls left until your limit resets on ${reset}.`;
   }
 
-  const fill = $("ring-fill");
-  fill.style.strokeDasharray = RING_C;
-  fill.style.strokeDashoffset = RING_C * (1 - Math.min(u.pct, 100) / 100);
-  $("ring").dataset.level = u.level;
+  $("meter").dataset.level = u.level;
+  $("meter-fill").style.width = Math.min(u.pct, 100) + "%";
   $("usage-pct").textContent = u.label;
-  $("usage-plan-badge").textContent = p.plan;
+  $("plan-badge").textContent = p.used > p.limit ? `${fmt(p.used - p.limit)} over limit` : `${fmt(u.remaining)} calls left`;
   $("usage-count").textContent = `${fmt(p.used)} / ${fmt(p.limit)} API calls`;
-  $("usage-remaining").textContent = p.used > p.limit ? `0 · ${fmt(p.used - p.limit)} over limit` : fmt(u.remaining);
   $("usage-reset").textContent = `Resets on ${reset} · in ${p.resetInDays} day${p.resetInDays === 1 ? "" : "s"}`;
 
   $("plan-name").textContent = p.plan;
@@ -115,7 +113,7 @@ function renderPricing(currentPlan) {
         <p class="tier-limit">${t.limit} calls / month</p>
         <p class="tier-overage">${t.short}</p>
         <ul>${t.features.map((f) => `<li>${f}</li>`).join("")}</ul>
-        <a class="btn ${isCurrent ? "btn-ghost" : "btn-primary"}" href="${BILLING_URL}">${cta}</a>
+        <a class="btn ${isCurrent ? "btn-outline" : "btn-primary"}" href="${BILLING_URL}">${cta}</a>
       </article>`;
   }).join("");
 }
