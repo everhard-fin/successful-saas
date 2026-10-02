@@ -50,7 +50,8 @@ Use a dedicated demo workspace with identity verification turned off. Real deplo
 
 ## Running the demo
 
-- Press **Shift + D** or click the small **Demo** pill (bottom left) to open the presenter panel. It's hidden by default.
+- Press **Shift + T** or click the small **Test guide** pill (bottom left) to open the test guide, which also switches personas.
+- Press **Shift + D** to open the persona panel with demo openers and **Reset conversation**. It's hidden by default and has no on-screen button.
 - Click a persona to switch. The dashboard updates, the Messenger shuts down and reboots as that user, and the choice is saved in `localStorage`, so it survives a refresh.
 - Use **Copy** next to an opener or follow-up line, then paste it into the Messenger.
 - **Reset conversation** reboots the Messenger for the current persona. Past conversations for that user stay in their Messenger history. Close them in the Inbox if you want a completely clean slate.

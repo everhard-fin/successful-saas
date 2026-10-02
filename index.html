@@ -175,7 +175,9 @@
   </footer>
 
   <!-- Presenter-only demo controls (Shift + D) -->
-  <button id="demo-toggle" class="demo-pill" type="button" aria-expanded="false" aria-controls="demo-panel">Demo</button>
+  <div class="pill-dock">
+    <button id="guide-toggle" class="demo-pill" type="button" aria-expanded="false" aria-controls="guide-panel">Test guide</button>
+  </div>
   <aside id="demo-panel" class="demo-panel glass" aria-label="Demo controls" aria-hidden="true" inert>
     <header class="panel-head">
       <div>
@@ -188,8 +190,36 @@
     <button id="reset-convo" class="btn btn-ghost full" type="button">Reset conversation</button>
   </aside>
 
+  <!-- Presenter-only Fin test guide (Shift + T); content from fin-content/test-guide.md -->
+  <aside id="guide-panel" class="demo-panel guide-panel glass" aria-label="Fin test guide" aria-hidden="true" inert>
+    <header class="panel-head">
+      <div>
+        <h3>Fin test guide</h3>
+        <p class="small">Toggle with <kbd>Shift</kbd> + <kbd>T</kbd></p>
+      </div>
+      <button id="guide-close" class="icon-btn" type="button" aria-label="Close test guide">×</button>
+    </header>
+    <div class="guide-body">
+      <details class="guide-section">
+        <summary>Before you test</summary>
+        <div id="guide-checklist"></div>
+      </details>
+      <div id="guide-tabs" class="guide-tabs" role="tablist" aria-label="Test scenarios"></div>
+      <div id="guide-content" role="tabpanel"></div>
+      <details class="guide-section">
+        <summary>Known issues and demo-only settings</summary>
+        <div id="guide-issues"></div>
+      </details>
+    </div>
+    <footer class="guide-foot">
+      <span id="guide-score"></span>
+      <button id="guide-reset" class="link-btn" type="button">Reset results</button>
+    </footer>
+  </aside>
+
   <div id="toasts" class="toasts" aria-live="polite"></div>
 
   <script src="app.js"></script>
+  <script src="test-guide.js"></script>
 </body>
 </html>

@@ -146,12 +146,19 @@ function markActive(id) {
   });
 }
 
-function togglePanel(open = !$("demo-panel").classList.contains("open")) {
-  const panel = $("demo-panel");
-  panel.classList.toggle("open", open);
-  panel.inert = !open;
-  panel.setAttribute("aria-hidden", String(!open));
-  $("demo-toggle").setAttribute("aria-expanded", String(open));
+// Presenter panels slide in from the left; only one can be open at a time.
+const PANELS = { demo: ["demo-panel", null], guide: ["guide-panel", "guide-toggle"] };
+
+function togglePanel(name = "demo", open = !$(PANELS[name][0]).classList.contains("open")) {
+  Object.entries(PANELS).forEach(([key, [panelId, pillId]]) => {
+    const panel = $(panelId);
+    if (!panel) return;
+    const on = key === name && open;
+    panel.classList.toggle("open", on);
+    panel.inert = !on;
+    panel.setAttribute("aria-hidden", String(!on));
+    if (pillId) $(pillId).setAttribute("aria-expanded", String(on));
+  });
 }
 
 function selectPersona(id) {
@@ -160,6 +167,7 @@ function selectPersona(id) {
   markActive(current.id);
   try { localStorage.setItem(STORAGE_KEY, current.id); } catch (_) { /* storage blocked */ }
   bootMessenger(current);
+  if (typeof syncGuidePersona === "function") syncGuidePersona(current.id);
 }
 
 /* ---------- Toasts & clipboard ---------- */
@@ -176,7 +184,7 @@ function toast(message, { kind = "info", sticky = false } = {}) {
   if (!sticky) setTimeout(dismiss, 2000);
 }
 
-async function copyText(text) {
+async function copyText(text, { quiet = false } = {}) {
   try {
     await navigator.clipboard.writeText(text);
   } catch (_) {
@@ -188,7 +196,7 @@ async function copyText(text) {
     document.execCommand("copy");
     ta.remove();
   }
-  toast("Copied");
+  if (!quiet) toast("Copied");
 }
 
 /* ---------- Intercom Messenger ---------- */
@@ -227,8 +235,7 @@ function warnMissingAppId() {
 
 /* ---------- Wiring ---------- */
 
-$("demo-toggle").addEventListener("click", () => togglePanel());
-$("demo-close").addEventListener("click", () => togglePanel(false));
+$("demo-close").addEventListener("click", () => togglePanel("demo", false));
 
 $("reset-convo").addEventListener("click", () => {
   if (!messengerEnabled) return warnMissingAppId();
@@ -253,11 +260,12 @@ $("persona-list").addEventListener("keydown", (e) => {
 
 document.addEventListener("keydown", (e) => {
   const typing = e.target.closest("input, textarea, select, [contenteditable]");
-  if (!typing && e.shiftKey && !e.metaKey && !e.ctrlKey && !e.altKey && e.key.toLowerCase() === "d") {
+  const shortcut = !typing && e.shiftKey && !e.metaKey && !e.ctrlKey && !e.altKey && { d: "demo", t: "guide" }[e.key.toLowerCase()];
+  if (shortcut) {
     e.preventDefault();
-    togglePanel();
+    togglePanel(shortcut);
   }
-  if (e.key === "Escape") togglePanel(false);
+  if (e.key === "Escape") togglePanel("demo", false);
 });
 
 let savedId = null;
