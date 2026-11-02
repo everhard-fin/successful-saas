@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
   <header class="nav">
@@ -29,11 +29,10 @@
         <span>Successful <b>SaaS</b></span>
       </a>
       <nav class="links" aria-label="Primary">
-        <a href="#" class="active">Overview</a>
-        <a href="#">Projects</a>
-        <a href="#">Team</a>
-        <a href="#">Billing</a>
-        <a href="#">Help</a>
+        <a href="#/overview" data-route="overview" class="active">Overview</a>
+        <a href="#/integrations" data-route="integrations">Integrations</a>
+        <a href="#/billing" data-route="billing">Billing</a>
+        <a href="#" id="help-link" data-pendo-feature="Help Link">Help</a>
       </nav>
       <div class="user">
         <div class="avatar" id="user-initials">JL</div>
@@ -78,9 +77,10 @@
         <strong id="banner-title"></strong>
         <p id="banner-text"></p>
       </div>
-      <a class="btn btn-danger" href="https://billing.example.com">View billing</a>
+      <a class="btn btn-danger" href="#/billing" data-pendo-feature="View Billing Button">View billing</a>
     </div>
 
+    <div class="view" data-view="overview">
     <div class="grid">
       <section class="card service-card" aria-labelledby="service-heading">
         <header class="card-head">
@@ -134,15 +134,15 @@
           <li><span>Over the limit</span><strong id="plan-overage"></strong></li>
         </ul>
         <p class="plan-note" id="plan-note" hidden>This legacy plan is no longer offered. Move to a current plan to raise your limit.</p>
-        <a class="btn btn-primary" href="https://billing.example.com">Manage plan</a>
+        <a class="btn btn-primary" href="#/billing" data-pendo-feature="Manage Plan Button">Manage plan</a>
       </section>
 
       <section class="card" aria-labelledby="actions-heading">
         <header class="card-head"><h2 id="actions-heading">Quick actions</h2></header>
         <ul class="actions">
           <li><a href="#"><span class="icon icon-sm icon-indigo" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"/></svg></span>Invite teammates<span class="chev">›</span></a></li>
-          <li><a href="#"><span class="icon icon-sm icon-teal" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 7H6a4 4 0 0 0 0 8h3M15 7h3a4 4 0 0 1 0 8h-3M8 11h8"/></svg></span>Connect an integration<span class="chev">›</span></a></li>
-          <li><a href="https://billing.example.com"><span class="icon icon-sm icon-violet" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span>View invoices<span class="chev">›</span></a></li>
+          <li><a href="#/integrations" data-pendo-feature="Connect an Integration Link"><span class="icon icon-sm icon-teal" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 7H6a4 4 0 0 0 0 8h3M15 7h3a4 4 0 0 1 0 8h-3M8 11h8"/></svg></span>Connect an integration<span class="chev">›</span></a></li>
+          <li><a href="#/billing" data-pendo-feature="View Invoices Link"><span class="icon icon-sm icon-violet" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span>View invoices<span class="chev">›</span></a></li>
           <li><a href="#"><span class="icon icon-sm icon-amber" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h11l5 5v11H4z"/><path d="M14 4v6h6"/></svg></span>Browse the help center<span class="chev">›</span></a></li>
         </ul>
       </section>
@@ -157,14 +157,52 @@
         </ol>
       </section>
     </div>
+    </div>
 
-    <section class="pricing" aria-labelledby="pricing-heading">
-      <div class="section-head">
-        <h2 id="pricing-heading">Plans that grow with you</h2>
-        <p class="muted">Simple monthly pricing. Change plans at any time.</p>
-      </div>
-      <div class="pricing-grid" id="pricing-grid"></div>
-    </section>
+    <div class="view" data-view="integrations" hidden>
+      <section class="card" aria-labelledby="integrations-heading">
+        <header class="card-head">
+          <div>
+            <h2 id="integrations-heading">Integrations</h2>
+            <p class="muted small">Connect the tools your team already uses.</p>
+          </div>
+          <span class="pill">2 of 4 connected</span>
+        </header>
+        <div class="integrations">
+          <article class="integration" data-integration="slack">
+            <span class="int-logo" style="--int: #4a154b">#</span>
+            <div class="int-copy"><h3>Slack</h3><p>Post usage alerts and weekly reports to a channel.</p></div>
+            <button class="btn btn-primary int-btn" type="button" data-connect="slack" data-pendo-feature="Connect Slack Button">Connect</button>
+            <p class="int-error" role="alert" hidden>Couldn't connect to Slack. Something went wrong, please try again.</p>
+          </article>
+          <article class="integration" data-integration="zapier">
+            <span class="int-logo" style="--int: #ff4f00">Z</span>
+            <div class="int-copy"><h3>Zapier</h3><p>Trigger workflows in 6,000+ apps from Successful SaaS events.</p></div>
+            <button class="btn btn-primary int-btn" type="button" data-connect="zapier" data-pendo-feature="Connect Zapier Button">Connect</button>
+          </article>
+          <article class="integration connected">
+            <span class="int-logo" style="--int: #00a1e0">S</span>
+            <div class="int-copy"><h3>Salesforce</h3><p>Sync accounts and usage to your CRM every hour.</p></div>
+            <span class="pill pill-green">Connected</span>
+          </article>
+          <article class="integration connected">
+            <span class="int-logo" style="--int: #24292f">G</span>
+            <div class="int-copy"><h3>GitHub</h3><p>Link deploys to API usage changes.</p></div>
+            <span class="pill pill-green">Connected</span>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <div class="view" data-view="billing" hidden>
+      <section class="pricing" aria-labelledby="pricing-heading">
+        <div class="section-head">
+          <h2 id="pricing-heading">Plans that grow with you</h2>
+          <p class="muted">Simple monthly pricing. Change plans at any time.</p>
+        </div>
+        <div class="pricing-grid" id="pricing-grid"></div>
+      </section>
+    </div>
   </main>
 
   <footer class="footer">
@@ -175,7 +213,48 @@
   </footer>
 
   <!-- Presenter-only demo controls (Shift + D) -->
+  <!-- Under-the-hood view of what Pendo records and how Fin reads it (Shift + P) -->
+  <aside id="lens" class="lens" aria-label="Pendo session context" hidden>
+    <header class="lens-head">
+      <div>
+        <p class="lens-eyebrow">Under the hood</p>
+        <h3>Pendo session context</h3>
+      </div>
+      <button id="lens-close" class="icon-btn" type="button" aria-label="Hide session lens">×</button>
+    </header>
+
+    <div class="lens-ids">
+      <div><span>Pendo Visitor ID</span><code id="lens-visitor"></code></div>
+      <div><span>Intercom user_id</span><code id="lens-user"></code></div>
+      <p id="lens-match" class="lens-match"></p>
+      <p id="lens-agent" class="lens-agent"></p>
+    </div>
+
+    <div class="flow" id="flow" data-step="0">
+      <div class="flow-track">
+        <div class="flow-node" data-node="1"><span class="flow-icon">💬</span><b>Messenger</b></div>
+        <div class="flow-node" data-node="2"><span class="flow-icon fin">F</span><b>Fin</b></div>
+        <div class="flow-node" data-node="3"><span class="flow-icon">⇄</span><b>Data connector</b></div>
+        <div class="flow-node" data-node="4"><span class="flow-icon pendo">P</span><b>Pendo MCP</b></div>
+        <span class="flow-packet" id="flow-packet"></span>
+      </div>
+      <p class="flow-call"><code>getSessionActivity({ visitorId })</code></p>
+      <p class="flow-caption" id="flow-caption" aria-live="polite"></p>
+      <button id="flow-replay" class="link-btn" type="button">Replay what Fin does</button>
+    </div>
+
+    <div class="lens-timeline-head">
+      <strong>This session</strong>
+      <span id="lens-count" class="small"></span>
+    </div>
+    <ol id="lens-timeline" class="lens-timeline"></ol>
+    <p class="lens-legend">
+      <span class="t-page">Page</span><span class="t-feature">Feature</span><span class="t-track">Track event</span><span class="t-error">Error</span><span class="t-frustration">Frustration</span>
+    </p>
+  </aside>
+
   <div class="pill-dock">
+    <button id="lens-toggle" class="demo-pill" type="button" aria-expanded="false" aria-controls="lens">Session lens</button>
     <button id="guide-toggle" class="demo-pill" type="button" aria-expanded="false" aria-controls="guide-panel">Test guide</button>
   </div>
   <aside id="demo-panel" class="demo-panel glass" aria-label="Demo controls" aria-hidden="true" inert>
@@ -219,7 +298,8 @@
 
   <div id="toasts" class="toasts" aria-live="polite"></div>
 
-  <script src="app.js"></script>
-  <script src="test-guide.js"></script>
+  <script src="app.js?v=3"></script>
+  <script src="test-guide.js?v=2"></script>
+  <script src="pendo.js?v=3"></script>
 </body>
 </html>

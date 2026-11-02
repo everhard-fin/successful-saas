@@ -113,7 +113,7 @@ function renderPricing(currentPlan) {
         <p class="tier-limit">${t.limit} calls / month</p>
         <p class="tier-overage">${t.short}</p>
         <ul>${t.features.map((f) => `<li>${f}</li>`).join("")}</ul>
-        <a class="btn ${isCurrent ? "btn-outline" : "btn-primary"}" href="${BILLING_URL}">${cta}</a>
+        <a class="btn ${isCurrent ? "btn-outline" : "btn-primary"}" href="${BILLING_URL}" data-pendo-feature="Pricing ${cta} Button">${cta}</a>
       </article>`;
   }).join("");
 }
@@ -168,6 +168,24 @@ function selectPersona(id) {
   try { localStorage.setItem(STORAGE_KEY, current.id); } catch (_) { /* storage blocked */ }
   bootMessenger(current);
   if (typeof syncGuidePersona === "function") syncGuidePersona(current.id);
+  if (typeof syncPendoPersona === "function") syncPendoPersona(current);
+}
+
+/* ---------- Routing ---------- */
+
+const ROUTES = { overview: "Overview", integrations: "Integrations", billing: "Billing" };
+
+function currentRoute() {
+  const name = location.hash.replace(/^#\/?/, "");
+  return ROUTES[name] ? name : "overview";
+}
+
+function renderRoute() {
+  const route = currentRoute();
+  document.querySelectorAll(".view").forEach((el) => { el.hidden = el.dataset.view !== route; });
+  document.querySelectorAll("[data-route]").forEach((a) => a.classList.toggle("active", a.dataset.route === route));
+  document.title = `${ROUTES[route]} · Successful SaaS`;
+  if (typeof onPendoRoute === "function") onPendoRoute(route);
 }
 
 /* ---------- Toasts & clipboard ---------- */
@@ -237,6 +255,13 @@ function warnMissingAppId() {
 
 $("demo-close").addEventListener("click", () => togglePanel("demo", false));
 
+window.addEventListener("hashchange", renderRoute);
+
+$("help-link").addEventListener("click", (e) => {
+  e.preventDefault();
+  if (messengerEnabled) window.Intercom("show");
+});
+
 $("reset-convo").addEventListener("click", () => {
   if (!messengerEnabled) return warnMissingAppId();
   bootMessenger(current);
@@ -275,4 +300,5 @@ if (messengerEnabled) loadMessenger();
 else warnMissingAppId();
 
 renderPanel();
+renderRoute();
 selectPersona(savedId || "jordan");

@@ -10,7 +10,8 @@ All brands, people and emails are synthetic.
 | --- | --- |
 | `index.html` | Page markup |
 | `styles.css` | Enterprise theme (solid sections, glass hero), responsive layout |
-| `app.js` | Personas, dashboard rendering, demo panel, Messenger boot |
+| `app.js` | Personas, dashboard rendering, page routing, demo panel, Messenger boot |
+| `pendo.js` | Pendo install and identify, the Session lens, the Integrations page |
 
 No build step, framework or backend. The only external resources are the Intercom Messenger script and the Inter font from Google Fonts.
 
@@ -51,6 +52,7 @@ Use a dedicated demo workspace with identity verification turned off. Real deplo
 ## Running the demo
 
 - Press **Shift + T** or click the small **Test guide** pill (bottom left) to open the test guide, which also switches personas.
+- Press **Shift + P** or click **Session lens** to show or hide the Pendo sidebar. See `fin-content/pendo-session-context.md` for the Pendo setup and the demo flow.
 - Press **Shift + D** to open the persona panel with demo openers and **Reset conversation**. It's hidden by default and has no on-screen button.
 - Click a persona to switch. The dashboard updates, the Messenger shuts down and reboots as that user, and the choice is saved in `localStorage`, so it survives a refresh.
 - Use **Copy** next to an opener or follow-up line, then paste it into the Messenger.
