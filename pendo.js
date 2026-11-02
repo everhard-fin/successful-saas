@@ -3,7 +3,6 @@ const PENDO_API_KEY = "2230e0e8-67b7-4abc-9ea0-8c5a86083acd";
 const PENDO_CDN = "https://cdn.pendo.io"; // US
 // const PENDO_CDN = "https://cdn.eu.pendo.io"; // EU
 
-const LENS_KEY = "orbitly.lens";
 const pendoEnabled = Boolean(PENDO_API_KEY) && PENDO_API_KEY !== "REPLACE_ME";
 const PAGE_NAMES = { overview: "Overview Page", integrations: "Integrations Page", billing: "Billing Page" };
 const TYPE_LABELS = { page: "Page", feature: "Feature", track: "Track event", error: "Error", frustration: "Frustration", omitted: "Omitted" };
@@ -217,7 +216,6 @@ function setLens(open) {
   $("lens").hidden = !open;
   document.body.classList.toggle("lens-open", open);
   $("lens-toggle").setAttribute("aria-expanded", String(open));
-  try { localStorage.setItem(LENS_KEY, open ? "1" : "0"); } catch (_) { /* storage blocked */ }
 }
 
 // Called from selectPersona() in app.js after the Messenger reboots as the new persona.
@@ -261,10 +259,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-let lensSaved = null;
-try { lensSaved = localStorage.getItem(LENS_KEY); } catch (_) { /* storage blocked */ }
-
 if (pendoEnabled) loadPendo();
-setLens(lensSaved ? lensSaved === "1" : window.innerWidth >= 1100);
+setLens(false);
 renderAgentStatus();
 syncPendoPersona(current);
