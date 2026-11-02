@@ -190,19 +190,21 @@ async function connectIntegration(btn) {
   card.classList.add("busy");
   btn.textContent = "Connecting…";
   if (error) error.hidden = true;
-  await wait(900);
 
   if (btn.dataset.connect === "slack") {
-    // A real failing request and console error, so Pendo's error collection has something genuine to capture.
+    // A real failing request and an uncaught error straight after the click: Pendo only counts an error click for a thrown JS error, not console.error.
     const status = await fetch("api/integrations/slack/connect", { method: "POST" }).then((r) => r.status, () => 0);
-    console.error(`Slack connect failed: admin_approval_required. A Slack workspace admin must approve the Successful SaaS app (HTTP ${status}).`);
+    setTimeout(() => { throw new Error(`Slack connect failed: admin_approval_required. A Slack workspace admin must approve the Successful SaaS app (HTTP ${status}).`); });
     record("error", "Network error", `POST /api/integrations/slack/connect → ${status || "failed"}`);
-    record("error", "Console error", "Slack connect failed: admin_approval_required");
+    record("error", "JavaScript error", "Slack connect failed: admin_approval_required");
     record("frustration", "Error click", "Connect Slack Button");
     pendoTrack("Integration Connect Failed", { integration: name, reason: "admin_approval_required" });
+    if (messengerEnabled) window.Intercom("trackEvent", "slack-connect-failed", { reason: "admin_approval_required" });
+    await wait(600);
     btn.textContent = "Try again";
     error.hidden = false;
   } else {
+    await wait(900);
     pendoTrack("Integration Connected", { integration: name });
     card.classList.add("connected");
     btn.outerHTML = '<span class="pill pill-green">Connected</span>';

@@ -63,12 +63,26 @@ Add this under **Fin AI Agent → Guidance**:
 
 Also publish `knowledge/08-connecting-slack.md` so Fin knows what `admin_approval_required` means.
 
+## Proactive message when Slack fails
+
+When the Slack connection fails, the site sends the Intercom event `slack-connect-failed`. An Outbound message on that event opens the conversation, and Fin's reply uses Pendo session context.
+
+In Intercom, go to **Outbound → New → Chat**:
+
+- **Audience:** Users
+- **Trigger:** the user triggers the event `slack-connect-failed`. Fail a Slack connection once on the live site first, so the event exists.
+- **Message:** "I noticed you weren't able to connect Slack. Want me to take a look?"
+- **Follow-up:** **Let Fin respond**
+- **Frequency:** at most once per day per user
+- **Set live**
+
+Pendo's own frustration signals (proactive help) would do the same job natively. They need the Agent Toolkit Intercom connection pointed at this workspace. In the shared Pendo subscription, that connection belongs to another agent.
+
 ## The demo, with no script
 
-1. Pick a persona (Shift + D). The lens starts a fresh session for that visitor.
-2. Go to **Integrations** and click **Connect** on Slack. It fails with a vague message. Click **Try again** a few times quickly.
-3. Watch the lens fill: page view, feature clicks, network and console errors, an error click, a rage click and a track event. Nav clicks show up struck through: untagged, so Fin never sees them.
-4. Open the Messenger. The flow at the top of the lens plays: Messenger → Fin → data connector → Pendo, with the events coming back.
-5. Ask "Slack isn't working". Fin should say it can see the failed attempts and explain the Slack admin approval, instead of telling you to try again.
+1. Pick a persona (Shift + D). Use a different persona for each rehearsal, because the frequency limit stops the message repeating.
+2. Go to **Integrations** and click **Connect** on Slack. It fails with a vague message, and Fin's proactive message appears.
+3. Reply "Yes, what's wrong?". Fin reads the session from Pendo and explains that a Slack admin must approve the app.
+4. Optional: press **Shift + P** to open the Session lens and show what Pendo recorded.
 
-The flow animation is an illustration that plays when the Messenger opens. The Messenger doesn't expose when Fin actually calls the connector, so check the conversation's details in the Inbox for the real call.
+Check the conversation in the Inbox to confirm Fin called `getSessionActivity`. If it returned "No recent activity", Pendo hadn't processed the session yet, so leave a little more time before replying.
